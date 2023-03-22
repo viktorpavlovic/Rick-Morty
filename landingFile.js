@@ -1,15 +1,45 @@
-const url = "https://rickandmortyapi.com/api/character";
+let url = "https://rickandmortyapi.com/api/character/?page=1";
 const container = document.querySelector("main");
 const body = document.body;
+const next = document.querySelector(".next");
+const previous = document.querySelector(".previous");
+
+let MAXPAGE;
+let MINPAGE = 1;
+
 async function getCharacters() {
   const response = await fetch(url);
   const result = await response.json();
   return result;
 }
+getCharacters().then((data) => {
+  printCharacters(data);
+  MAXPAGE = data.info.pages;
+});
+let counter = 1;
 
-getCharacters().then((data) => printCharacters(data));
+next.addEventListener("click", () => {
+  ++counter;
+  if (counter <= MAXPAGE) {
+    url = `https://rickandmortyapi.com/api/character/?page=${counter}`;
+    getCharacters().then((data) => printCharacters(data));
+  } else {
+    counter = MAXPAGE;
+  }
+});
+
+previous.addEventListener("click", () => {
+  --counter;
+  if (counter >= MINPAGE) {
+    url = `https://rickandmortyapi.com/api/character/?page=${counter}`;
+    getCharacters().then((data) => printCharacters(data));
+  } else {
+    counter = MINPAGE;
+  }
+});
 
 function printCharacters(obj) {
+  container.innerHTML = "";
   obj.results.forEach((element) => {
     const card = document.createElement("div");
     card.classList.add("cardStyle");
