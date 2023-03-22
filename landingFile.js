@@ -4,6 +4,10 @@ const body = document.body;
 const next = document.querySelector(".next");
 const previous = document.querySelector(".previous");
 
+const pagPrev = document.querySelector(".prev");
+const pagCur = document.querySelector(".cur");
+const pagNext = document.querySelector(".later");
+pagPrev.textContent = "";
 let MAXPAGE;
 let MINPAGE = 1;
 
@@ -21,8 +25,14 @@ let counter = 1;
 next.addEventListener("click", () => {
   ++counter;
   if (counter <= MAXPAGE) {
+    pagCur.textContent = counter;
+    pagNext.textContent = counter + 1;
     url = `https://rickandmortyapi.com/api/character/?page=${counter}`;
     getCharacters().then((data) => printCharacters(data));
+    pagPrev.textContent = counter - 1;
+    if (counter === MAXPAGE) {
+      pagNext.textContent = "";
+    }
   } else {
     counter = MAXPAGE;
   }
@@ -31,8 +41,14 @@ next.addEventListener("click", () => {
 previous.addEventListener("click", () => {
   --counter;
   if (counter >= MINPAGE) {
+    pagCur.textContent = counter;
+    pagPrev.textContent = counter - 1;
     url = `https://rickandmortyapi.com/api/character/?page=${counter}`;
     getCharacters().then((data) => printCharacters(data));
+    pagNext.textContent = counter + 1;
+    if (counter === MINPAGE) {
+      pagPrev.textContent = "";
+    }
   } else {
     counter = MINPAGE;
   }
