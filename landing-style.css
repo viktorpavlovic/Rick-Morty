@@ -1,0 +1,105 @@
+body {
+  min-height: 100vh;
+  background-image: url("img/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background-color: #463f3a;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+}
+header h1 {
+  letter-spacing: 5px;
+}
+main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 30px;
+  gap: 20px;
+  justify-content: space-around;
+}
+footer {
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+  background-color: #463f3a;
+}
+.cardStyle {
+  width: 20%;
+  text-align: center;
+  padding: 20px;
+  cursor: pointer;
+  background-color: #80ffdb;
+  box-shadow: 0px 0px 10px 2px rgba(185, 251, 192, 1);
+}
+.cardStyle img {
+  border-radius: 10px;
+  width: 100%;
+  display: block;
+}
+.cardStyle p {
+  color: black;
+  font-size: 18px;
+  text-transform: uppercase;
+  padding: 10px 0 0 0;
+}
+.modal-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  background-color: rgba(185, 251, 192, 0.5);
+}
+.modal-wrapper section {
+  border-radius: 50% 50% 50% 50% / 85% 85% 15% 15%;
+  box-shadow: 0px 0px 10px 2px rgba(105, 48, 195, 1);
+  padding: 50px;
+  width: 60%;
+  height: 40vh;
+  background-color: #6930c3;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  color: #80ffdb;
+  position: relative;
+}
+.modal-wrapper .left {
+  text-align: center;
+}
+.left h3 {
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding: 10px;
+}
+.modal-wrapper img {
+  width: 150px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 2px rgba(185, 251, 192, 1);
+}
+.right p {
+  text-transform: uppercase;
+  font-size: 18px;
+  letter-spacing: 3px;
+}
+section span {
+  position: absolute;
+  bottom: 10px;
+  font-size: 30px;
+  font-weight: 900;
+  transform: rotate(90deg);
+  color: #80ffdb;
+  cursor: pointer;
+}
