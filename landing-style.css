@@ -119,7 +119,6 @@ section span {
   color: #fff;
   font-size: 15px;
   cursor: pointer;
-  z-index: 1;
 }
 .pagination {
   margin: 0 auto;
@@ -130,6 +129,9 @@ section span {
   border-radius: 20px;
   align-items: center;
   padding: 15px;
+}
+.pagination p {
+  cursor: pointer;
 }
 
 .cur {

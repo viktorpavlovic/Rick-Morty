@@ -7,6 +7,8 @@ const previous = document.querySelector(".previous");
 const pagPrev = document.querySelector(".prev");
 const pagCur = document.querySelector(".cur");
 const pagNext = document.querySelector(".later");
+const pagPrevPrev = document.querySelector(".prev-prev");
+const pagNextLater = document.querySelector(".next-later");
 pagPrev.textContent = "";
 let MAXPAGE;
 let MINPAGE = 1;
@@ -36,6 +38,15 @@ next.addEventListener("click", () => {
   } else {
     counter = MAXPAGE;
   }
+  if (counter >= 3) {
+    pagPrevPrev.textContent = counter - 2;
+  }
+  if (counter <= MAXPAGE) {
+    pagNextLater.textContent = counter + 2;
+  }
+  if (counter >= MAXPAGE - 1) {
+    pagNextLater.innerHTML = "";
+  }
 });
 
 previous.addEventListener("click", () => {
@@ -52,8 +63,108 @@ previous.addEventListener("click", () => {
   } else {
     counter = MINPAGE;
   }
+  if (counter >= 3) {
+    pagPrevPrev.textContent = counter - 2;
+  }
+  if (counter <= MAXPAGE) {
+    pagNextLater.textContent = counter + 2;
+  }
+  if (counter < 3) {
+    pagPrevPrev.textContent = "";
+  }
+  if (counter === MAXPAGE - 1) {
+    pagNextLater.textContent = "";
+  }
 });
 
+pagNext.addEventListener("click", () => {
+  counter++;
+  pagCur.textContent = counter;
+  pagNext.textContent = counter + 1;
+  pagPrev.textContent = counter - 1;
+  pagNextLater.textContent = counter + 2;
+  pagPrevPrev.textContent = counter - 2;
+  url = `https://rickandmortyapi.com/api/character/?page=${counter}`;
+  getCharacters().then((data) => printCharacters(data));
+  if (counter === MAXPAGE) {
+    pagNext.innerHTML = "";
+  }
+  if (counter === MINPAGE) {
+    pagPrevPrev.innerHTML = "";
+  }
+  if (counter < MINPAGE + 2) {
+    pagPrevPrev.innerHTML = "";
+  }
+  if (counter === MAXPAGE - 1) {
+    pagNextLater.textContent = "";
+  } else if (counter === MAXPAGE) {
+    pagNextLater.textContent = "";
+    pagNext.textContent = "";
+  }
+});
+pagPrev.addEventListener("click", () => {
+  counter--;
+  pagCur.textContent = counter;
+  pagNext.textContent = counter + 1;
+  pagPrev.textContent = counter - 1;
+  pagNextLater.textContent = counter + 2;
+  pagPrevPrev.textContent = counter - 2;
+  url = `https://rickandmortyapi.com/api/character/?page=${counter}`;
+  getCharacters().then((data) => printCharacters(data));
+  if (counter === MINPAGE) {
+    pagPrev.innerHTML = "";
+  }
+  if (counter < MINPAGE + 2) {
+    pagPrevPrev.innerHTML = "";
+  }
+  if (counter === MAXPAGE - 1) {
+    pagNextLater.textContent = "";
+  }
+});
+pagNextLater.addEventListener("click", () => {
+  counter += 2;
+  pagCur.textContent = counter;
+  pagNext.textContent = counter + 1;
+  pagPrev.textContent = counter - 1;
+  pagNextLater.textContent = counter + 2;
+  pagPrevPrev.textContent = counter - 2;
+  url = `https://rickandmortyapi.com/api/character/?page=${counter}`;
+  getCharacters().then((data) => printCharacters(data));
+  if (counter === MAXPAGE) {
+    pagNext.innerHTML = "";
+  }
+  if (counter === MINPAGE) {
+    pagPrevPrev.innerHTML = "";
+  }
+  if (counter < MINPAGE + 2) {
+    pagPrevPrev.innerHTML = "";
+  }
+  if (counter === MAXPAGE - 1) {
+    pagNextLater.textContent = "";
+  } else if (counter === MAXPAGE) {
+    pagNextLater.textContent = "";
+    pagNext.textContent = "";
+  }
+});
+pagPrevPrev.addEventListener("click", () => {
+  counter -= 2;
+  pagCur.textContent = counter;
+  pagNext.textContent = counter + 1;
+  pagPrev.textContent = counter - 1;
+  pagNextLater.textContent = counter + 2;
+  pagPrevPrev.textContent = counter - 2;
+  url = `https://rickandmortyapi.com/api/character/?page=${counter}`;
+  getCharacters().then((data) => printCharacters(data));
+  if (counter === MINPAGE) {
+    pagPrev.innerHTML = "";
+  }
+  if (counter < MINPAGE + 2) {
+    pagPrevPrev.innerHTML = "";
+  }
+  if (counter === MAXPAGE - 1) {
+    pagNextLater.textContent = "";
+  }
+});
 function printCharacters(obj) {
   container.innerHTML = "";
   obj.results.forEach((element) => {
